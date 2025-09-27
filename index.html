@@ -31,7 +31,8 @@
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Indian_Railways_logo.svg/1200px-Indian_Railways_logo.svg.png" alt="Indian Railways Logo" class="h-12 mr-4">
             </div>
             <h1 class="text-xl md:text-3xl font-bold text-center flex-grow">Track Fitment Information System</h1>
-            <div class="w-12"></div> </div>
+            <div class="w-12"></div>
+        </div>
     </header>
 
     <main class="container mx-auto p-4 md:p-8">
@@ -40,7 +41,7 @@
             <div class="md:col-span-1 space-y-6">
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <h2 class="text-xl font-semibold text-gray-700 mb-4">Scanned QR Code</h2>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=IR-FITMENT-UID-SEC-2025-789XYZ" alt="QR Code" class="mx-auto border-4 border-gray-200 rounded-md">
+                    <img src="https://raw.githubusercontent.com/samiksha-627/product-information/refs/heads/main/qrcode.png" alt="QR Code" class="mx-auto border-4 border-gray-200 rounded-md">
                     <p class="text-gray-500 text-sm mt-4">ID: <span id="qr-unique-id" class="font-mono"></span></p>
                 </div>
                 
@@ -77,4 +78,344 @@
                                 <label class="font-semibold" for="installed-toggle">Installed:</label>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" id="installed-toggle" class="sr-only peer" disabled>
-                                    <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:
+                                    <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
+
+                            <div id="installation-details" class="md:col-span-2 space-y-4 collapsible">
+                                <div class="form-field"><label class="font-semibold">Nearest Station:</label><input type="text" id="info-station" class="form-input" disabled/></div>
+                                <div class="form-field"><label class="font-semibold">Combination Number:</label><input type="text" id="info-combination" class="form-input" disabled/></div>
+                                
+                                <div class="form-field flex items-center space-x-3 border-t pt-4 mt-2">
+                                    <label class="font-semibold" for="maintenance-toggle">Maintenance:</label>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="maintenance-toggle" class="sr-only peer" disabled>
+                                        <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                    </label>
+                                </div>
+
+                                <div id="maintenance-details" class="md:col-span-2 space-y-4 pl-4 border-l-2 border-blue-200 collapsible">
+                                    <div class="form-field"><label class="font-semibold">Supervisor:</label><input type="text" id="info-supervisor" class="form-input" disabled/></div>
+                                    <div class="form-field"><label class="font-semibold">Date:</label><input type="date" id="info-maintenance-date" class="form-input" disabled/></div>
+                                    <div class="form-field"><label class="font-semibold">Comment:</label><textarea id="info-comment" class="form-input" rows="3" disabled></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right text-sm text-gray-500 mt-6 pt-2 border-t">
+                        Last Updated: <span id="last-updated" class="font-medium"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="bg-blue-900 text-white text-center p-4 mt-8">
+        <p>&copy; 2025 Indian Railways | Developed by Fynest</p>
+    </footer>
+
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl w-full max-w-sm">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Supervisor Login</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Login</button>
+                 <button type="button" id="close-modal" class="w-full bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300 mt-2">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- 1. DATA STORE ---
+    // Hardcoded product data object. In a real application, this would come from a server.
+    const productData = {
+        name: "Elastic Rail Clip Mk III",
+        uniqueId: "IR-FITMENT-UID-SEC-2025-789XYZ",
+        supplier: "Pandrol Rahee Technologies",
+        railwayRegion: "South East Central Railway (SECR)",
+        lotNumber: "PRT/SECR/2025/B7-L4",
+        installed: true,
+        installationDetails: {
+            nearestStation: "Durg Junction (DURG)",
+            combinationNumber: "PDR-T7-S45",
+            maintenance: {
+                required: true,
+                supervisor: "R. K. Sharma",
+                date: "2025-09-15",
+                comment: "Routine torque check performed. All parameters within tolerance."
+            }
+        },
+        lastUpdated: "2025-09-15T11:30:00Z"
+    };
+
+    // --- 2. STATE MANAGEMENT ---
+    let isLoggedIn = false;
+
+    // --- 3. DOM ELEMENT SELECTORS ---
+    const elements = {
+        // Text/Info display
+        name: document.getElementById('info-name'),
+        uniqueId: document.getElementById('info-unique-id'),
+        qrUniqueId: document.getElementById('qr-unique-id'),
+        supplier: document.getElementById('info-supplier'),
+        region: document.getElementById('info-region'),
+        lot: document.getElementById('info-lot'),
+        lastUpdated: document.getElementById('last-updated'),
+        statusIndicator: document.getElementById('status-indicator'),
+        statusText: document.getElementById('status-text'),
+        
+        // Containers
+        installationDetails: document.getElementById('installation-details'),
+        maintenanceDetails: document.getElementById('maintenance-details'),
+        
+        // Editable Inputs
+        installedToggle: document.getElementById('installed-toggle'),
+        stationInput: document.getElementById('info-station'),
+        combinationInput: document.getElementById('info-combination'),
+        maintenanceToggle: document.getElementById('maintenance-toggle'),
+        supervisorInput: document.getElementById('info-supervisor'),
+        maintenanceDateInput: document.getElementById('info-maintenance-date'),
+        commentInput: document.getElementById('info-comment'),
+
+        // Buttons & Modal
+        editButton: document.getElementById('editButton'),
+        saveButton: document.getElementById('saveButton'),
+        downloadButton: document.getElementById('downloadButton'),
+        loginModal: document.getElementById('login-modal'),
+        loginForm: document.getElementById('login-form'),
+        closeModalButton: document.getElementById('close-modal'),
+    };
+    
+    // --- 4. RENDER/DISPLAY LOGIC ---
+    /**
+     * Populates the webpage with data from the productData object.
+     */
+    function renderProductInfo() {
+        // Populate static info
+        elements.name.textContent = productData.name;
+        elements.uniqueId.textContent = productData.uniqueId;
+        elements.qrUniqueId.textContent = productData.uniqueId;
+        elements.supplier.textContent = productData.supplier;
+        elements.region.textContent = productData.railwayRegion;
+        elements.lot.textContent = productData.lotNumber;
+        elements.lastUpdated.textContent = new Date(productData.lastUpdated).toLocaleString();
+
+        // Populate editable fields
+        elements.installedToggle.checked = productData.installed;
+        elements.stationInput.value = productData.installationDetails.nearestStation;
+        elements.combinationInput.value = productData.installationDetails.combinationNumber;
+        elements.maintenanceToggle.checked = productData.installationDetails.maintenance.required;
+        elements.supervisorInput.value = productData.installationDetails.maintenance.supervisor;
+        elements.maintenanceDateInput.value = productData.installationDetails.maintenance.date;
+        elements.commentInput.value = productData.installationDetails.maintenance.comment;
+        
+        updateUIState();
+    }
+
+    /**
+     * Updates UI elements based on current data and login state
+     * (e.g., status indicator, visibility of sections).
+     */
+    function updateUIState() {
+        // Status indicator
+        if (productData.installed) {
+            elements.statusIndicator.className = 'w-4 h-4 rounded-full bg-green-500';
+            elements.statusText.textContent = "Installed";
+            elements.statusText.className = "font-semibold text-green-600";
+        } else {
+            elements.statusIndicator.className = 'w-4 h-4 rounded-full bg-red-500';
+            elements.statusText.textContent = "Not Installed";
+            elements.statusText.className = "font-semibold text-red-600";
+        }
+        
+        // Conditional visibility of installation details
+        if (elements.installedToggle.checked) {
+            elements.installationDetails.classList.add('expanded');
+        } else {
+            elements.installationDetails.classList.remove('expanded');
+        }
+
+        // Conditional visibility of maintenance details
+        if (elements.installedToggle.checked && elements.maintenanceToggle.checked) {
+            elements.maintenanceDetails.classList.add('expanded');
+        } else {
+            elements.maintenanceDetails.classList.remove('expanded');
+        }
+    }
+
+    // --- 5. EDITING & LOGIN LOGIC ---
+    /**
+     * Toggles the disabled state of form inputs.
+     * @param {boolean} enable - True to enable editing, false to disable.
+     */
+    function setEditingState(enable) {
+        const inputs = [
+            elements.installedToggle, elements.stationInput, elements.combinationInput,
+            elements.maintenanceToggle, elements.supervisorInput, elements.maintenanceDateInput,
+            elements.commentInput
+        ];
+        
+        inputs.forEach(input => {
+            input.disabled = !enable;
+            // Add/remove styling for disabled state for non-input elements
+            if (input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') {
+                if (enable) {
+                    input.classList.remove('form-input-disabled');
+                } else {
+                    input.classList.add('form-input-disabled');
+                }
+            }
+        });
+
+        elements.editButton.classList.toggle('hidden', enable);
+        elements.saveButton.classList.toggle('hidden', !enable);
+        isLoggedIn = enable;
+    }
+    
+    // Handle login form submission
+    elements.loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = e.target.elements.username.value;
+        const password = e.target.elements.password.value;
+
+        // Hardcoded credentials
+        if (username === 'supervisor' && password === '1234') {
+            elements.loginModal.classList.add('hidden');
+            setEditingState(true);
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    });
+
+    // Handle saving changes
+    elements.saveButton.addEventListener('click', () => {
+        // Update productData from the form fields
+        productData.installed = elements.installedToggle.checked;
+        productData.installationDetails.nearestStation = elements.stationInput.value;
+        productData.installationDetails.combinationNumber = elements.combinationInput.value;
+        productData.installationDetails.maintenance.required = elements.maintenanceToggle.checked;
+        productData.installationDetails.maintenance.supervisor = elements.supervisorInput.value;
+        productData.installationDetails.maintenance.date = elements.maintenanceDateInput.value;
+        productData.installationDetails.maintenance.comment = elements.commentInput.value;
+        productData.lastUpdated = new Date().toISOString();
+
+        setEditingState(false);
+        renderProductInfo(); // Re-render to show updated values and state
+        alert('Information updated successfully!');
+    });
+
+    // --- 6. EVENT LISTENERS ---
+
+    // Show/hide conditional sections when toggles are clicked (only in edit mode)
+    elements.installedToggle.addEventListener('change', () => {
+        if(isLoggedIn) updateUIState();
+    });
+    elements.maintenanceToggle.addEventListener('change', () => {
+        if(isLoggedIn) updateUIState();
+    });
+    
+    // Modal controls
+    elements.editButton.addEventListener('click', () => elements.loginModal.classList.remove('hidden'));
+    elements.closeModalButton.addEventListener('click', () => elements.loginModal.classList.add('hidden'));
+
+    // Download report button
+    elements.downloadButton.addEventListener('click', downloadReportAsCSV);
+
+    // --- 7. UTILITY FUNCTIONS ---
+    /**
+     * Generates a report object from the current product data.
+     * @returns {object} A flat object with key-value pairs for the report.
+     */
+    function generateReportData() {
+        const data = productData;
+        let report = {
+            "Name of Fitment": data.name,
+            "Unique ID": data.uniqueId,
+            "Supplier": data.supplier,
+            "Railway Region": data.railwayRegion,
+            "Lot Number": data.lotNumber,
+            "Installed": data.installed ? "Yes" : "No",
+        };
+
+        if (data.installed) {
+            report["Nearest Station"] = data.installationDetails.nearestStation;
+            report["Combination Number"] = data.installationDetails.combinationNumber;
+            report["Maintenance Required"] = data.installationDetails.maintenance.required ? "Yes" : "No";
+            if (data.installationDetails.maintenance.required) {
+                report["Supervisor"] = data.installationDetails.maintenance.supervisor;
+                report["Maintenance Date"] = data.installationDetails.maintenance.date;
+                report["Comment"] = `"${data.installationDetails.maintenance.comment.replace(/"/g, '""')}"`; // Handle quotes in comments
+            }
+        }
+        report["Last Updated"] = new Date(data.lastUpdated).toLocaleString();
+        return report;
+    }
+    
+    /**
+     * Creates and triggers the download of a CSV report file.
+     */
+    function downloadReportAsCSV() {
+        const reportData = generateReportData();
+        let csvContent = "Field,Value\r\n";
+        
+        for (const key in reportData) {
+            csvContent += `"${key}","${reportData[key]}"\r\n`;
+        }
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", `report_${productData.uniqueId}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
+    // --- 8. INITIALIZATION ---
+    renderProductInfo(); // Initial population of data on page load
+});
+
+// Basic CSS for form-like display
+const style = document.createElement('style');
+style.textContent = `
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .form-input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #d1d5db; /* gray-300 */
+        border-radius: 0.375rem; /* rounded-md */
+        transition: border-color 0.2s;
+    }
+    .form-input:disabled {
+        background-color: #f3f4f6; /* gray-100 */
+        cursor: not-allowed;
+    }
+    .form-input:focus {
+        outline: none;
+        border-color: #3b82f6; /* blue-500 */
+        box-shadow: 0 0 0 1px #3b82f6;
+    }
+`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
