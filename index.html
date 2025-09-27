@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Railways - Track Fitment Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Simple transition for conditional sections */
+        .collapsible {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .expanded {
+            max-height: 500px; /* Adjust as needed */
+        }
+        /* Custom styles for disabled fields */
+        .form-input-disabled {
+            background-color: #f3f4f6; /* Tailwind's gray-100 */
+            cursor: not-allowed;
+            border-color: #e5e7eb; /* Tailwind's gray-200 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <header class="bg-blue-800 text-white shadow-md">
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Indian_Railways_logo.svg/1200px-Indian_Railways_logo.svg.png" alt="Indian Railways Logo" class="h-12 mr-4">
+            </div>
+            <h1 class="text-xl md:text-3xl font-bold text-center flex-grow">Track Fitment Information System</h1>
+            <div class="w-12"></div> </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Scanned QR Code</h2>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=IR-FITMENT-UID-SEC-2025-789XYZ" alt="QR Code" class="mx-auto border-4 border-gray-200 rounded-md">
+                    <p class="text-gray-500 text-sm mt-4">ID: <span id="qr-unique-id" class="font-mono"></span></p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Actions</h2>
+                    <div class="space-y-3">
+                         <button id="editButton" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Supervisor Login to Edit</button>
+                         <button id="saveButton" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 hidden">Save Changes</button>
+                        <button id="downloadButton" class="w-full bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">Download Report (CSV)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                           <h2 class="text-2xl font-bold text-blue-900" id="info-name"></h2>
+                           <p class="text-gray-500">Unique ID: <span id="info-unique-id" class="font-mono"></span></p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div id="status-indicator" class="w-4 h-4 rounded-full"></div>
+                            <span id="status-text" class="font-semibold"></span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-gray-800" id="product-info-form">
+                            <div class="form-field"><label class="font-semibold">Supplier:</label><span id="info-supplier"></span></div>
+                            <div class="form-field"><label class="font-semibold">Railway Region:</label><span id="info-region"></span></div>
+                            <div class="form-field"><label class="font-semibold">Lot Number:</label><span id="info-lot"></span></div>
+                            
+                            <div class="form-field flex items-center space-x-3 md:col-span-2 border-t pt-4 mt-2">
+                                <label class="font-semibold" for="installed-toggle">Installed:</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="installed-toggle" class="sr-only peer" disabled>
+                                    <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:
